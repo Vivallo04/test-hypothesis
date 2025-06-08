@@ -25,7 +25,7 @@ function mapBackendResult(backend: any): AnalysisResult {
     result: backend.result,
     timestamp: backend.created_at,
     filename: backend.filename,
-    data: [],
+    data: backend.data || [],
     groups: backend.groups ? Object.keys(backend.groups) : [],
   };
 }

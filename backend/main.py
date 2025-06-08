@@ -2,8 +2,8 @@ from fastapi import FastAPI, UploadFile, File, Form, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from .database import SessionLocal, engine, init_sqlite_schema, test_sqlite_connection
-from . import models, schemas, tests
+from database import SessionLocal, engine, init_sqlite_schema, test_sqlite_connection
+import models, schemas, tests
 import shutil
 import os
 import pandas as pd
@@ -77,6 +77,10 @@ def upload_csv(
             raise ValueError(f'Unknown test type: {test_type}')
         print(f"[API] Test result: median={median}, std_dev={std_dev}, p_value={p_value}, result={result}")
         group_data = df.groupby('group')['value'].apply(list).to_dict()
+        flat_data = []
+        for group, values in group_data.items():
+            for value in values:
+                flat_data.append({"group": group, "value": value})
         print(f"[API] Group data: {group_data}")
     except Exception as e:
         if os.path.exists(file_location):
@@ -100,6 +104,7 @@ def upload_csv(
     print(f"[API] Analysis saved to DB with id: {analysis.id}")
     response = jsonable_encoder(analysis)
     response['groups'] = group_data
+    response['data'] = flat_data
     print(f"[API] /upload completed for file: {file.filename}")
     return response
 
@@ -108,7 +113,17 @@ def get_history(db: Session = Depends(get_db)):
     print("[API] /history called")
     results = db.query(models.Analysis).order_by(models.Analysis.created_at.desc()).all()
     print(f"[API] /history returning {len(results)} records")
-    return jsonable_encoder(results)
+    response = []
+    for analysis in results:
+        item = jsonable_encoder(analysis)
+        group_data = item.get('groups', {})
+        flat_data = []
+        for group, values in group_data.items():
+            for value in values:
+                flat_data.append({"group": group, "value": value})
+        item['data'] = flat_data
+        response.append(item)
+    return response
 
 @app.post("/rerun/{analysis_id}", response_model=schemas.AnalysisResult)
 def rerun_analysis(analysis_id: int, db: Session = Depends(get_db)):
@@ -140,17 +155,18 @@ def rerun_analysis(analysis_id: int, db: Session = Depends(get_db)):
             print(f"[API] Unknown test type: {analysis.test_type}")
             raise ValueError('Unknown test type')
         print(f"[API] Rerun result: median={median}, std_dev={std_dev}, p_value={p_value}, result={result}")
+        group_data = df.groupby('group')['value'].apply(list).to_dict()
+        flat_data = []
+        for group, values in group_data.items():
+            for value in values:
+                flat_data.append({"group": group, "value": value})
+        response = jsonable_encoder(analysis)
+        response['groups'] = group_data
+        response['data'] = flat_data
+        return response
     except Exception as e:
         print(f"[API] /rerun/{analysis_id} error: {e}")
         raise HTTPException(status_code=400, detail=str(e))
-    analysis.median = median if median is not None else 0.0
-    analysis.std_dev = std_dev if std_dev is not None else 0.0
-    analysis.p_value = p_value if p_value is not None else 0.0
-    analysis.result = result or 'error'
-    db.commit()
-    db.refresh(analysis)
-    print(f"[API] /rerun/{analysis_id} completed")
-    return analysis
 
 @app.delete("/delete/{analysis_id}")
 def delete_analysis(analysis_id: int, db: Session = Depends(get_db)):
