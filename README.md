@@ -2,6 +2,49 @@
 
 A modern, responsive web application for statistical hypothesis testing with interactive visualizations.
 
+---
+
+## 🚀 Quick Start: Run with Docker Compose (No Technical Skills Needed)
+
+**1. Install Docker Desktop:**
+- Download and install Docker Desktop for your system: [Get Docker](https://www.docker.com/products/docker-desktop/)
+- Open Docker Desktop and make sure it is running.
+
+**2. Download the Project:**
+- If you received a ZIP, extract it. If you have a folder, open it.
+
+**3. Open a Terminal in the Project Folder:**
+- On Windows: Right-click in the folder and choose "Open in Terminal" or "Open PowerShell window here".
+- On Mac: Right-click and choose "New Terminal at Folder".
+
+**4. Start the App:**
+- Type this command and press Enter:
+  ```bash
+  docker-compose up --build
+  ```
+- The first time, this may take a few minutes as it downloads everything.
+
+**5. Open the App in Your Browser:**
+- Go to [http://localhost:3000](http://localhost:3000) for the web interface.
+- The backend API runs at [http://localhost:8000](http://localhost:8000)
+
+**6. Stop the App:**
+- In the terminal, press `Ctrl+C` to stop.
+- To free up resources, you can also run:
+  ```bash
+  docker-compose down
+  ```
+
+---
+
+## 📄 Documentation & Resources
+
+- [Frontend User Guide](../hypotest-frontend-docs.md)
+- [Backend API Documentation](../hypotest-api-docs.md)
+- [CSV Format Example](#csv-format-requirements)
+
+---
+
 ## Features
 
 ### Core Functionality
