@@ -1,0 +1,94 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Task List
+
+Guidelines for creating and managing task lists in markdown files to track project progress.
+
+## Task List Creation
+
+1. Create task lists in a markdown file (in the project root):
+   - Use `TASKS.md` or a descriptive name relevant to the feature
+   - Include a clear title and description of the feature being implemented
+
+2. Structure the file with these sections:
+   ```markdown
+   # Feature name implementation
+   Brief description of the feature and its purpose.
+   
+   ## Completed Tasks
+   - [x] Task 1 completed
+   - [x] Task 2 completed
+   
+   ## In Progress Tasks
+   - [ ] Task 3 currently being worked on
+   - [ ] Task 4 to be implemented
+   
+   ## Future Tasks
+   - [ ] Task 5 planned for future implementation
+   - [ ] Task 6 planned for future implementation
+   
+   ## Relevant Files
+   - `/path/to/file1.js` - Brief description of file's purpose
+   - `/path/to/file2.js` - Brief description of file's purpose (✓) for completed components
+   
+   ## Implementation Details
+   - Architecture decisions
+   - Data flow descriptions
+   - Technical components needed
+   - Environment configuration
+   ```
+
+## Task Management Process
+
+1. Update the task list as you progress:
+   - Mark tasks as completed by changing `[ ]` to `[x]`
+   - Add new tasks as they are identified
+   - Move tasks between sections as appropriate
+
+2. Keep "Relevant Files" section updated with:
+   - File paths that have been created/modified
+   - Brief descriptions of each file's purpose
+   - Status indicators (e.g., ✓) for completed components
+
+3. Add implementation details:
+   - Architecture decisions
+   - Data flow descriptions
+   - Technical components needed
+   - Environment configuration
+
+## Best Practices
+
+1. Regularly update the task list file after implementing significant components
+2. Mark completed tasks with [x] when finished
+3. Add new tasks discovered during implementation
+4. Maintain the "Relevant Files" section with accurate file paths and descriptions
+5. Document implementation details, especially for complex features
+6. When implementing tasks one by one, first check which task to implement next
+7. After implementing a task, update its status
+
+## Example Task Update
+
+When updating a task from "In Progress" to "Completed":
+
+1. Move the task item from the "In Progress" section to the "Completed Tasks" section
+2. Change the checkbox from `[ ]` to `[x]`
+3. Add any relevant notes or implementation details
+4. Update the "Relevant Files" section with new files created/modified
+5. Add status indicators for completed components
+
+## Regular Reviews
+
+1. Schedule regular reviews of the task list to ensure it remains accurate
+2. Use the task list during team meetings to track progress
+3. Update priorities as needed based on project requirements
+4. Archive completed features to maintain clean documentation
+
+## Integration with Development Workflow
+1. Reference task IDs in commit messages when implementing tasks
+2. Link relevant issues or pull requests to specific tasks
+3. Use the task list to generate sprint reports or progress updates
+4. Review the task list before merging feature branches
+

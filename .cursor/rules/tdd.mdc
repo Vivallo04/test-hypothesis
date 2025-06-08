@@ -1,0 +1,114 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Test-Driven Development Rules
+Guidelines for implementing and maintaining Test-Driven Development practices in Cursor and any code editor.
+TDD Core Principles
+
+## Follow the Red-Green-Refactor cycle:
+
+Red: Write a failing test for the desired functionality
+Green: Write minimal code to make the test pass
+Refactor: Improve the code while keeping tests passing
+
+
+## Key principles to maintain:
+markdown- Write tests before implementation code
+- Only write code to pass a failing test
+- Keep tests and implementation simple
+- Run tests frequently
+- Refactor regularly to improve design
+- Maintain high test coverage
+
+
+# TDD Setup
+
+## Configure your project for testing:
+
+Select appropriate testing frameworks (Jest, Mocha, pytest, JUnit, etc.)
+Set up test directories that mirror your source code structure
+Configure test runners in your IDE or build system
+Establish naming conventions for test files and test cases
+
+
+## Configure Cursor for TDD:
+
+Set up keyboard shortcuts for running tests
+Install relevant testing extensions
+Configure Cursor AI to assist with test generation
+Set up split views to see tests and implementation side by side
+
+
+
+# TDD Workflow Process
+
+## Red Phase:
+
+Start by writing a test for a small, specific piece of functionality
+Ensure the test clearly describes the expected behavior
+Run the test to confirm it fails (and for the right reasons)
+Use Cursor's AI assistance to help generate test cases by describing expected behavior
+
+
+## Green Phase:
+
+Write the minimum amount of code to make the test pass
+Avoid implementing functionality beyond what's being tested
+Run tests to confirm they now pass
+Use Cursor's AI to help suggest minimal implementations
+
+
+## Refactor Phase:
+
+Improve code design, readability, and performance
+Eliminate duplication
+Ensure all tests still pass after each change
+Use Cursor's code analysis features to identify improvement opportunities
+
+
+## Repeat the cycle:
+
+Select the next small piece of functionality
+Write a new failing test
+Implement code to make it pass
+Refactor as needed
+
+
+
+# TDD Best Practices
+
+Keep tests and implementation simple:
+
+Write small, focused tests that verify one behavior
+Implement just enough code to pass the tests
+Refactor regularly to prevent technical debt
+
+
+## Maintain meaningful tests:
+
+Tests should clearly describe the behavior they verify
+Use descriptive test and function names
+Include appropriate assertions for all relevant expectations
+Test happy paths and edge cases
+
+
+## Optimize feedback loops:
+
+Run tests frequently, ideally after every code change
+Set up fast test runners and continuous integration
+Focus on fast unit tests for development
+Separate slow integration tests when needed
+
+
+## Effective use of Cursor:
+
+Use AI assistance to identify test cases for complex functions
+Let Cursor suggest implementation code based on your tests
+Use split views to see tests and implementation side by side
+
+
+
+
+Leverage auto-refactoring tools during the refactor phas
