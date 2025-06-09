@@ -18,6 +18,7 @@ WORKDIR /app
 ENV NODE_ENV development
 
 COPY --from=builder /app ./
+COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3000
 
