@@ -1,8 +1,8 @@
 # Install dependencies only when needed
 FROM node:18-alpine AS deps
 WORKDIR /app
-COPY frontend/package.json frontend/package-lock.json* 
-RUN yarn install
+COPY frontend/package.json frontend/yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
